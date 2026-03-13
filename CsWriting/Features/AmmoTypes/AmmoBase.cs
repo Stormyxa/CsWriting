@@ -7,7 +7,7 @@ namespace CsWriting.Features.AmmoTypes
     public abstract class AmmoBase : IAmmo
     {
         public abstract AmmoType Type { get; } // each inherited class will decide his Type on his own
-        public int Amount { get; set; } = 0;
+        public int Amount { get; private set; } = 0;
         public abstract int PackSize { get; }
 
         public void Add(int amount)
@@ -39,6 +39,13 @@ namespace CsWriting.Features.AmmoTypes
             inventory.PutScrap(); // +1 scrap
             Amount -= PackSize;
             Console.WriteLine($"Successfully disassembled an ammo Type of {Type}.");
+        }
+
+        public int Take(int needed) // tells how much to load
+        {
+            int toLoad = Math.Min(needed, Amount);
+            Amount -= toLoad;
+            return toLoad;
         }
 
         public void ShowAmount()

@@ -28,11 +28,18 @@ namespace CsWriting.Features.Weapons.Base
         }
         public void Reload(IAmmo ammo)
         {
+            if (ammo.Amount == 0)
+            {
+                Console.WriteLine("You don't have any ammo to load into your gun.");
+                return;
+            }
+
             if (ammo.Type != AmmoType) // maybe change ammotype to requiredammotype? or what?
             {
                 Console.WriteLine($"Wrong ammo type for {Model}! Required: {AmmoType}!");
                 return;
             }
+
             int requiredAmmo = MagazineCapacity - CurrentAmmo;
             if (requiredAmmo == 0)
             {
@@ -40,9 +47,14 @@ namespace CsWriting.Features.Weapons.Base
                 return;
             }
 
-            int toLoad = Math.Min(requiredAmmo, MagazineCapacity);
+            int toLoad = ammo.Take(requiredAmmo);
+            if (toLoad == 0)
+            {
+                Console.WriteLine($"You have no ammo type of {ammo.Type} to load in {Model}!");
+                return;
+            }
+
             CurrentAmmo += toLoad; // loaded ammo into the mag
-            ammo.Amount -= toLoad; // removed that amount from the ammo heap
 
             Console.WriteLine($"Successfully loaded {toLoad} ammo type of {ammo.Type} in {Model}");
         }
