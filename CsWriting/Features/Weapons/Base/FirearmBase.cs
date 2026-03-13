@@ -6,7 +6,7 @@ namespace CsWriting.Features.Weapons.Base
 {
     public abstract class FirearmBase(FirearmModel model) : IWeapon
     {
-        public FirearmModel Model { get; } = model; // for now we DECIDE the model, okey
+        public FirearmModel Model { get; } = model; // for now we DECIDE the model, okey, so no check or division if its rifle or not
         public abstract AmmoType AmmoType { get; }
         public abstract int MagazineCapacity { get; }
 
@@ -31,6 +31,7 @@ namespace CsWriting.Features.Weapons.Base
             if (ammo.Type != AmmoType) // maybe change ammotype to requiredammotype? or what?
             {
                 Console.WriteLine($"Wrong ammo type for {Model}! Required: {AmmoType}!");
+                return;
             }
             int requiredAmmo = MagazineCapacity - CurrentAmmo;
             if (requiredAmmo == 0)
@@ -40,8 +41,10 @@ namespace CsWriting.Features.Weapons.Base
             }
 
             int toLoad = Math.Min(requiredAmmo, MagazineCapacity);
-            CurrentAmmo += toLoad; //TODO
-            // change ammo use, gun now handles reload logic of itself, i wannt use the private set here :)
+            CurrentAmmo += toLoad; // loaded ammo into the mag
+            ammo.Amount -= toLoad; // removed that amount from the ammo heap
+
+            Console.WriteLine($"Successfully loaded {toLoad} ammo type of {ammo.Type} in {Model}");
         }
 
         public void Unload(IAmmo ammo)

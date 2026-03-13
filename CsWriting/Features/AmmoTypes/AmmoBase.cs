@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Text.Encodings.Web;
 using CsWriting.Enums;
-using CsWriting.Features.Weapons.Base;
 using CsWriting.Interfaces;
 
 namespace CsWriting.Features.AmmoTypes
 {
-    public abstract class AmmoBase(AmmoType type) : IAmmo
+    public abstract class AmmoBase : IAmmo
     {
-        public AmmoType Type { get; } = type;
-        public int Amount { get; private set; } = 0;
+        public abstract AmmoType Type { get; } // each inherited class will decide his Type on his own
+        public int Amount { get; set; } = 0;
         public abstract int PackSize { get; }
 
         public void Add(int amount)
@@ -21,13 +19,13 @@ namespace CsWriting.Features.AmmoTypes
         {
             if (inventory.ScrapCount <= 0)
             {
-                Console.WriteLine($"Not enough scrap to craft an ammo type of {type}!");
+                Console.WriteLine($"Not enough scrap to craft an ammo Type of {Type}!");
                 return;
             }
 
             inventory.UseUpScrap(); // -1 scrap
             Amount += PackSize; // + pack size
-            Console.WriteLine($"Successfully created an ammo type of {type}.");
+            Console.WriteLine($"Successfully created an ammo Type of {Type}.");
         }
 
         public void Disassemble(Inventory inventory)
@@ -40,7 +38,7 @@ namespace CsWriting.Features.AmmoTypes
 
             inventory.PutScrap(); // +1 scrap
             Amount -= PackSize;
-            Console.WriteLine($"Successfully disassembled an ammo type of {type}.");
+            Console.WriteLine($"Successfully disassembled an ammo Type of {Type}.");
         }
 
         public void ShowAmount()
@@ -48,10 +46,10 @@ namespace CsWriting.Features.AmmoTypes
             switch (Amount)
             {
                 case 0:
-                    Console.WriteLine($"No ammo type of {type} in your inventory!");
+                    Console.WriteLine($"No ammo Type of {Type} in your inventory!");
                     break;
                 case 1:
-                    Console.WriteLine($"There is only 1 bullet type of {type} in your inventory!");
+                    Console.WriteLine($"There is only 1 bullet Type of {Type} in your inventory!");
                     break;
                 default:
                     Console.WriteLine($"There are {Amount} bullets in your inventory!");
