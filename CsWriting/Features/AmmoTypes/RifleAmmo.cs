@@ -41,9 +41,9 @@ namespace CsWriting.Features.AmmoTypes
             Console.WriteLine("Successfully disassembled your bullet.");
         }
 
-        public void Use(IGun weapon)
+        public void Use(IWeapon weapon)
         {
-            string weaponModel = weapon.Model; // let's store the weapon model here
+            string weaponModel = (weapon.Model).ToString(); // let's store the weapon model here
 
             int currentChamber = weapon.CurrentAmmo; // let's store the current amount of ammo in chamber here
             int requiredAmmo = weapon.MagazineCapacity - currentChamber; // let's see how many ammo do we need to load in order to get full mag

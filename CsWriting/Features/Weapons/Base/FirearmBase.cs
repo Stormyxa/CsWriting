@@ -1,15 +1,14 @@
 ﻿using System;
-using CsWriting.Interfaces;
 using CsWriting.Enums;
+using CsWriting.Interfaces;
 
-namespace CsWriting.Features.Guns
+namespace CsWriting.Features.Weapons.Base
 {
-    public class Rifle(string model, int magazineCapacity, bool hasFlashlight) : IGun
+    public abstract class FirearmBase(FirearmModel model) : IWeapon
     {
-        public string Model { get; } = model;
-        public AmmoType AmmoType { get; } = AmmoType.RifleType;
-        public int MagazineCapacity { get; } = magazineCapacity;
-        public bool HasFlashlight { get; } = hasFlashlight;
+        public FirearmModel Model { get; } = model; // for now we DECIDE the model, okey
+        public abstract AmmoType AmmoType { get; }
+        public abstract int MagazineCapacity { get; }
 
         public int CurrentAmmo { get; private set; } = 0;
 
@@ -48,15 +47,6 @@ namespace CsWriting.Features.Guns
             {
                 Console.WriteLine("Out of ammo. Reload your gun!");
             }
-        }
-
-        public void MagDump()
-        {
-            while (CurrentAmmo >= 1)
-            {
-                Shoot();
-            }
-            Console.WriteLine("Mag dumped everything! Out of ammo.");
         }
     }
 }

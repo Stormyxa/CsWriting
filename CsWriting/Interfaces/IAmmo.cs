@@ -9,7 +9,7 @@ namespace CsWriting.Interfaces
         public int Amount { get; }
 
 
-        public void Use(IGun gun);
+        public void Use(IWeapon gun);
         public void Add(int amount);
         public void ShowAmount();
     }

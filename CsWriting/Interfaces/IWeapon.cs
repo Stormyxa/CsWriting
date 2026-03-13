@@ -1,13 +1,11 @@
-﻿using CsWriting.Enums;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System;
+using CsWriting.Enums;
 
 namespace CsWriting.Interfaces
 {
-    public interface IGun
+    public interface IWeapon
     {
-        public string Model { get; }
+        public FirearmModel Model { get; }
         public AmmoType AmmoType { get; }
         public int CurrentAmmo { get; }
         public int MagazineCapacity { get; }

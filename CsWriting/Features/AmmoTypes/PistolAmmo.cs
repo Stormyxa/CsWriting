@@ -42,9 +42,9 @@ namespace CsWriting.Features.AmmoTypes
             Console.WriteLine($"You have {Amount} ammo in your ammobox.");
         }
 
-        public void Use(IGun weapon)
+        public void Use(IWeapon weapon)
         {
-            string weaponModel = weapon.Model;
+            string weaponModel = (weapon.Model).ToString();
 
             int currentChamber = weapon.CurrentAmmo;
             int requiredAmmo = weapon.MagazineCapacity - currentChamber;
