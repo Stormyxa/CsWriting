@@ -28,7 +28,20 @@ namespace CsWriting.Features.Weapons.Base
         }
         public void Reload(IAmmo ammo)
         {
-            ammo.Use(this);
+            if (ammo.Type != AmmoType) // maybe change ammotype to requiredammotype? or what?
+            {
+                Console.WriteLine($"Wrong ammo type for {Model}! Required: {AmmoType}!");
+            }
+            int requiredAmmo = MagazineCapacity - CurrentAmmo;
+            if (requiredAmmo == 0)
+            {
+                Console.WriteLine($"Your {Model} is loaded already!");
+                return;
+            }
+
+            int toLoad = Math.Min(requiredAmmo, MagazineCapacity);
+            CurrentAmmo += toLoad; //TODO
+            // change ammo use, gun now handles reload logic of itself, i wannt use the private set here :)
         }
 
         public void Unload(IAmmo ammo)

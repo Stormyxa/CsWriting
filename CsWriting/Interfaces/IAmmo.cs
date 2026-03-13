@@ -7,6 +7,7 @@ namespace CsWriting.Interfaces
     {
         public AmmoType Type { get; }
         public int Amount { get; }
+        public int PackSize { get; }
 
 
         public void Use(IWeapon gun);
