@@ -3,9 +3,9 @@ using CsWriting.Enums;
 
 namespace CsWriting.Interfaces
 {
-    public interface IWeapon
+    public interface IWeapon<TEnum> where TEnum : Enum
     {
-        public FirearmModel Model { get; }
+        public TEnum Model { get; }
         public AmmoType AmmoType { get; }
         public int CurrentAmmo { get; }
         public int MagazineCapacity { get; }

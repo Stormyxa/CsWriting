@@ -4,9 +4,9 @@ using CsWriting.Interfaces;
 
 namespace CsWriting.Features.Weapons.Base
 {
-    public abstract class FirearmBase(FirearmModel model) : IWeapon
+    public abstract class FirearmBase<TModel>(TModel model) : IWeapon<TModel> where TModel : Enum
     {
-        public FirearmModel Model { get; } = model; // for now we DECIDE the model, okey, so no check or division if its rifle or not
+        public TModel Model { get; } = model;
         public abstract AmmoType AmmoType { get; }
         public abstract int MagazineCapacity { get; }
 

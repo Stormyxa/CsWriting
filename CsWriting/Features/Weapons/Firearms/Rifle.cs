@@ -1,10 +1,11 @@
 ﻿using System;
 using CsWriting.Enums;
+using CsWriting.Enums.FirearmModels;
 using CsWriting.Features.Weapons.Base;
 
 namespace CsWriting.Features.Weapons.Firearms
 {
-    public class Rifle(FirearmModel model) : FirearmBase(model)
+    public class Rifle(RifleModel rifleModel) : FirearmBase<RifleModel>(rifleModel)
     {
         public override AmmoType AmmoType { get; } = AmmoType.RifleType;
 
@@ -12,9 +13,9 @@ namespace CsWriting.Features.Weapons.Firearms
 
         public void MagDump()
         {
-            while (CurrentAmmo >= 1)
+            while (base.CurrentAmmo >= 1)
             {
-                Shoot();
+                base.Shoot();
             }
             Console.WriteLine("Mag dumped everything! Out of ammo.");
         }

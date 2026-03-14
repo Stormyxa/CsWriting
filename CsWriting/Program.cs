@@ -1,5 +1,6 @@
 ﻿using System;
 using CsWriting.Enums;
+using CsWriting.Enums.FirearmModels;
 using CsWriting.Features;
 using CsWriting.Features.AmmoTypes;
 
@@ -12,7 +13,7 @@ public class Program
     static void Main()
     {
         Inventory inventory = new Inventory("MyInventory");
-        Rifle rifle = new Rifle(FirearmModel.MTFE11SR); // I wanted to create a BaseGun and then rifle, but messed it up, so had to change base to rifle
+        Rifle rifle = new Rifle(RifleModel.AK12);
 
         Scrap scrap1 = new Scrap();
         Scrap scrap2 = new Scrap();
@@ -83,7 +84,7 @@ public class Program
         // logical error in my previous notes here
         // why 59? we reloaded! meaning 59 - 30 = 29. Great!
 
-        Pistol pistol = new Pistol(FirearmModel.Com18);
+        Pistol pistol = new Pistol(PistolModel.Com15);
         pistol.Reload(rifleAmmo);
         rifle.Reload(rifleAmmo);
     }
